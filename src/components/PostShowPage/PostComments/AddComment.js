@@ -8,10 +8,16 @@ export default function AddComment({ postId }) {
   const [content, setContent] = useState('');
 
   function onAddCommentButtonClick() {
-    alert('No futuro isso vai adicionar o comentário :)');
-
-    setName('');
-    setContent('');
+    const body = {
+      author: name,
+      content
+    }
+    const request = axios.post(`http://localhost:4001/posts/${postId}/comments`,body);
+    request.then((response)=>{
+      console.log(response);      
+    });  
+    request.catch((response)=> console.log(response));
+    
   }
 
   return (
