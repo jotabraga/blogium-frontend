@@ -12,6 +12,7 @@ import axios from 'axios';
 export default function PostShowPage() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
+  const [disableDelete, setDisabledelete] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -25,9 +26,19 @@ export default function PostShowPage() {
   }
 
   function onDeleteButtonClick() {
-    alert('No futuro, ao clicar neste botão o post vai ser excluído de verdade :)');
-    history.push('/');
-  }
+    const body = "";
+    const request = axios.delete(`http://localhost:4001/posts/${postId}`,body);
+    request.then((response) => {
+      setDisabledelete(true);
+      history.push('/');
+    });
+    request.catch((response) => {
+      console.log("falha");
+      console.log(response);
+    });
+
+}
+
 
   if (!post) return <Spinner />;
 
@@ -45,7 +56,7 @@ export default function PostShowPage() {
               >
                 Edit
               </Button>
-              <Button style={{ color: 'red', borderColor: 'red' }} onClick={onDeleteButtonClick}>
+              <Button disabled={disableDelete} style={{ color: 'red', borderColor: 'red' }} onClick={onDeleteButtonClick}>
                 Delete
               </Button>
             </div>
