@@ -12,7 +12,6 @@ export default function PostComments({ postId }) {
     const request = axios.get(`http://localhost:4001/posts/${postId}/comments`);
     request.then((response)=>{
       setComments(response.data);
-      console.log(response.data);
     });  
     request.catch((response)=> console.log(response));
   }, [postId]);
