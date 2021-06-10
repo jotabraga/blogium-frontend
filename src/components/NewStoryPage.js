@@ -11,13 +11,15 @@ export default function NewStoryPage() {
   const history = useHistory();
 
   function onPostSaveButtonClick() {
-    const body = {
+    console.log("entrou");
+    const data = {
       title,
       coverUrl,
-      content
+      contentPreview: content
     }
-    const request = axios.post('http://localhost:4001/new-story',body);
+    const request = axios.post('http://localhost:4001/new-story',data);
     request.then((response)=>{
+      console.log("entrou aqui");
       setSaveButtonDisable(true);
       history.push('/');
     });  
