@@ -26,17 +26,14 @@ export default function PostShowPage() {
   }
 
   function onDeleteButtonClick() {
-    const body = "";
-    const request = axios.delete(`http://localhost:4001/posts/${postId}`,body);
+    const request = axios.delete(`http://localhost:4001/posts/${postId}`);
     request.then((response) => {
       setDisabledelete(true);
       history.push('/');
     });
     request.catch((response) => {
-      console.log("falha");
       console.log(response);
     });
-
 }
 
 
