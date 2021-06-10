@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-
+import axios from 'axios';
 import Button from '../../Button';
+import PostComments from './PostComments';
 
-export default function AddComment({ postId }) {
+export default function AddComment({ postId, comments, setComments }) {
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
 
@@ -14,10 +15,9 @@ export default function AddComment({ postId }) {
     }
     const request = axios.post(`http://localhost:4001/posts/${postId}/comments`,body);
     request.then((response)=>{
-      console.log(response);      
+      setComments([...comments, response.data])     
     });  
-    request.catch((response)=> console.log(response));
-    
+    request.catch((response)=> console.log(response));    
   }
 
   return (
