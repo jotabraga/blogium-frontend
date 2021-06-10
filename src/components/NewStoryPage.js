@@ -11,7 +11,6 @@ export default function NewStoryPage() {
   const history = useHistory();
 
   function onPostSaveButtonClick() {
-    console.log("entrou");
     const data = {
       title,
       coverUrl,
@@ -19,7 +18,6 @@ export default function NewStoryPage() {
     }
     const request = axios.post('http://localhost:4001/new-story',data);
     request.then((response)=>{
-      console.log("entrou aqui");
       setSaveButtonDisable(true);
       history.push('/');
     });  
